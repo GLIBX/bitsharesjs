@@ -37,14 +37,6 @@ var {
 var {asset, account_name_eq_lit_predicate} = ops;
 
 // Must stay in sync with allTypes below.
-
-let extType = extension([{
-    name: 'f1',
-    type: uint16
-}, {
-    name: 'f2',
-    type: string
-}]);
 let AllTypes = new Serializer("all_types", {
     uint8,
     uint16,
@@ -73,8 +65,8 @@ let AllTypes = new Serializer("all_types", {
     time_optional: optional(time_point_sec),
     time_point_sec1: time_point_sec,
     time_point_sec2: time_point_sec,
-    ext1: extType,
-    ext2: extType,
+    ext1: extension(string),
+    ext2: extension(string)
 });
 
 // Must stay in sync with AllTypes above.
@@ -118,12 +110,7 @@ let allTypes = {
     time_optional: undefined,
     time_point_sec1: new Date(),
     time_point_sec2: Math.floor(Date.now() / 1000),
-    ext1: {
-        f1: 300
-    },
-    ext2: {
-        f2: "hello"
-    }
+    ext1: "test extension"
 };
 
 describe("Serializer", function() {

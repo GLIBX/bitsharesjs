@@ -120,7 +120,7 @@ describe("ECC", function() {
         });
         // DEBUG console.log('... key_checksum',key_checksum)
 
-        it("Throws on incorrect password", function() {
+        it("wrong password", function() {
             this.timeout(2500);
             var key_checksum = min_time_elapsed(function() {
                 return key.aes_checksum("password").checksum;
@@ -131,7 +131,7 @@ describe("ECC", function() {
                     min_time_elapsed(function() {
                         key.aes_private("bad password", key_checksum);
                     }),
-                "Password is incorrect"
+                "has wrong password"
             );
         });
 
@@ -147,32 +147,6 @@ describe("ECC", function() {
 
             // DEBUG console.log('... password_aes',password_aes)
             assert(password_aes !== null);
-        });
-
-        it("throws on empty brainkey", function() {
-            let string = "";
-
-            assert.throws(function() {
-                key.get_brainPrivateKey(string);
-            });
-
-            assert.throws(function() {
-                key.normalize_brainKey(string);
-            });
-        });
-
-        it("throws on non-string brainkey", function() {
-            assert.throws(function() {
-                key.get_brainPrivateKey(null);
-            });
-
-            assert.throws(function() {
-                key.get_brainPrivateKey(1);
-            });
-
-            assert.throws(function() {
-                key.get_brainPrivateKey(undefined);
-            });
         });
     });
 
